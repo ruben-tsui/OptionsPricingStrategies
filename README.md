@@ -5,7 +5,7 @@
 ## Module 1
 Random walk and geometric (multiplicative) random walk simulation
 
-## Required software
+## Recommended software platform
 **Anaconda**
 http://www.anaconda.com/download
 
