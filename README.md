@@ -13,4 +13,4 @@ Supported platforms: Windows, macOS, Linux
 
 Latest version: 2018.12; Python 3.7
 
-Disk space requirements: approx. 653 MB download; 4 to 5 GB installed
+Disk space requirements: approx. 650 MB download; 4 to 5 GB installed 
