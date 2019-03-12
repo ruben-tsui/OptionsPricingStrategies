@@ -6,7 +6,9 @@
 Random walk and geometric (multiplicative) random walk simulation
 
 ## Recommended software platform
+
 **Anaconda**
+
 http://www.anaconda.com/download
 
 Supported platforms: Windows, macOS, Linux
