@@ -7,7 +7,7 @@ Random walk and geometric (multiplicative) random walk simulation
 
 To run this module, open an Anaconda Prompt and run
 
-python finance_main1.py
+<code>python finance_main1.py</code>
 
 ## Recommended software platform
 
