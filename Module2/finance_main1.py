@@ -563,4 +563,4 @@ if __name__ == '__main__':
     #window.showGraph()
     window.show()
     #window.initialize()
-    #sys.exit(app.exec_())
+    sys.exit(app.exec_())
