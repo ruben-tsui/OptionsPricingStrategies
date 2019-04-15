@@ -131,15 +131,17 @@ def theoretical_statistics_RW(y0, u, n, p, K):
 
 
 class Window(QtWidgets.QDialog):
+#class Window(QtWidgets.QScrollArea):
     def __init__(self):
         QtWidgets.QDialog.__init__(self)
         # load the .ui file created in Qt Creator directly
         uic.loadUi('mod2.ui', self)
         #initialize(self)
-        self.dirty = True # this flag indicates SIMULATION is REQUIRED
         self.DEBUG = True
+        self.dirty = True # this flag indicates SIMULATION is REQUIRED
+        self.deltaTdict = {0:0.1, 1:0.05, 2:0.01, 3:0.005}
         # initialization parameters
-        self.randomwalk_params = {'S0': 100, 'μ': 0.05, 'σ': 0.2, 'Δt': 0.01, 'T': 1, 'N':100000, 'P': 25, 'K': 100}
+        self.randomwalk_params = {'S0': 100, 'μ': 0.05, 'σ': 0.2, 'Δt': 0.01, 'T': 1, 'N':100000, 'P': 30, 'K': 100}
         self.S = None # this will store the current set of simulated values
         self.X = None
         self.Y = None
@@ -198,7 +200,9 @@ class Window(QtWidgets.QDialog):
         self.slider_S0.valueChanged.connect(self.changeSliderS0)
         
         self.slider_K.valueChanged.connect(self.changeSliderK)
-        
+
+        #self.btn_fixY.clicked.connect(self.on_click_btn_fixY)
+
         ###################
 
         ###### delete ax4   
@@ -224,6 +228,7 @@ class Window(QtWidgets.QDialog):
         ## RW/GRW radio buttons
         self.radioGRW.clicked.connect(self.on_click_radioGRW)
         self.radioRW.clicked.connect(self.on_click_radioRW)
+
 
     def reset_t1t2(self):
         magScale = self.lastDeltaT / self.randomwalk_params['Δt']
@@ -320,8 +325,10 @@ class Window(QtWidgets.QDialog):
     def changeValue_oSlider_deltaT(self, value):
         self.dirty = True
         self.lastDeltaT = self.randomwalk_params['Δt']
-        self.randomwalk_params['Δt'] = 10**(-value) # 1 => 0.1; 2 => 0.01, etc.
-        self.label_deltaT.setText(f"Δt = {10**(-value)}")
+        #self.randomwalk_params['Δt'] = 10**(-value) # 1 => 0.1; 2 => 0.01, etc.
+        #self.label_deltaT.setText(f"Δt = {10**(-value)}")
+        self.randomwalk_params['Δt'] = self.deltaTdict[value] # 0 => 0.1; 1 => 0.05, etc.
+        self.label_deltaT.setText(f"Δt = {self.deltaTdict[value]}")
 
     def changeValue_oSlider_sigma(self, value):
         self.dirty = True
@@ -357,18 +364,24 @@ class Window(QtWidgets.QDialog):
         self.showGraph()
         QApplication.restoreOverrideCursor()
 
-
-
+    #def on_click_btn_fixY(self):
+    #    mpl = self.oMplCanvas.canvas
+    #    mainplot = mpl.axes[0][0]
+    #    mainplot.set_ylim(top=400)
+    #    mpl.draw()
+    #    #mpl.flush_events()
+    #    return None
         
     def showGraph(self):
         #self.oMplCanvas.close()
         mpl = self.oMplCanvas.canvas
         mainplot = mpl.axes[0][0]
         mainplot.clear()
-        mainplot.autoscale(enable=True)
+        #mainplot.autoscale(enable=True)
+        #mainplot.autoscale(enable=False)
         #mainplot.set_adjustable(adjustable='box')
         #mainplot.set_xlim(auto=True)
-        mainplot.set_ylim(auto=True)
+        #mainplot.set_ylim(auto=True)
         P = self.randomwalk_params['P']
         T = self.randomwalk_params['T']
         Δt = self.randomwalk_params['Δt']
@@ -386,7 +399,8 @@ class Window(QtWidgets.QDialog):
         mainplot.set_xlabel('time step', fontsize=8, color='brown')
         mainplot.set_ylabel('price', fontsize=8, color='brown')
         mainplot.tick_params(axis = 'both', which = 'major', labelsize = 6)
-        divider = make_axes_locatable(mainplot)
+        #mainplot.draw()
+        #divider = make_axes_locatable(mainplot)
         #####
         #axHist = divider.append_axes("right", 1.25, pad=0.1, sharey=mainplot)
         axHist = mpl.axes[0][1]
@@ -529,6 +543,9 @@ class Window(QtWidgets.QDialog):
         #mpl2.fig.show(False)
         #####
         mpl.fig.set_visible(True)
+        if self.checkBox_yLim.isChecked():
+            new_yLim = int(self.txt_yLim.toPlainText())
+            mainplot.set_ylim(top=new_yLim)
         mpl.draw()
 
         # Matplotlib canvas class to create figure
@@ -546,4 +563,4 @@ if __name__ == '__main__':
     #window.showGraph()
     window.show()
     #window.initialize()
-    sys.exit(app.exec_())
+    #sys.exit(app.exec_())

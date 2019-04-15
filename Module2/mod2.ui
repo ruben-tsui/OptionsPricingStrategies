@@ -10,6 +10,12 @@
     <height>966</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>10</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Derivatives Lab</string>
   </property>
@@ -120,7 +126,7 @@
     <widget class="QPushButton" name="btn_Copy2Clipboard">
      <property name="geometry">
       <rect>
-       <x>994</x>
+       <x>980</x>
        <y>450</y>
        <width>131</width>
        <height>31</height>
@@ -134,6 +140,49 @@
      <property name="text">
       <string>Copy to Clipboard</string>
      </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>900</x>
+       <y>560</y>
+       <width>211</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QTextEdit" name="txt_yLim">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>104</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Tahoma'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;300&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_yLim">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Fix Y-axis upper limit</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -422,7 +471,7 @@
      <number>6</number>
     </property>
     <property name="pageStep">
-     <number>5</number>
+     <number>1</number>
     </property>
     <property name="value">
      <number>2</number>
@@ -464,32 +513,41 @@
       <height>16</height>
      </rect>
     </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
     <property name="toolTip">
      <string>No. of paths to be shown</string>
     </property>
     <property name="minimum">
-     <number>5</number>
+     <number>10</number>
     </property>
     <property name="maximum">
      <number>100</number>
     </property>
     <property name="singleStep">
-     <number>1</number>
+     <number>10</number>
     </property>
     <property name="pageStep">
-     <number>5</number>
+     <number>10</number>
     </property>
     <property name="value">
-     <number>25</number>
+     <number>30</number>
     </property>
     <property name="sliderPosition">
-     <number>25</number>
+     <number>30</number>
+    </property>
+    <property name="tracking">
+     <bool>false</bool>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <property name="tickPosition">
+     <enum>QSlider::NoTicks</enum>
+    </property>
     <property name="tickInterval">
-     <number>5</number>
+     <number>10</number>
     </property>
    </widget>
    <widget class="QSlider" name="oSlider_TimeStep">
@@ -703,7 +761,7 @@
      </rect>
     </property>
     <property name="minimum">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="maximum">
      <number>3</number>
