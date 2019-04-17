@@ -135,7 +135,17 @@ class Window(QtWidgets.QDialog):
     def __init__(self):
         QtWidgets.QDialog.__init__(self)
         # load the .ui file created in Qt Creator directly
-        uic.loadUi('mod2.ui', self)
+        Interface = uic.loadUi('mod2.ui', self)
+        ## try to make main window scrollable
+        #self.centralWidget = QtWidgets.QWidget(Interface)
+        #layout = QtWidgets.QVBoxLayout(self.centralWidget)
+        #self.scrollArea = QtWidgets.QScrollArea(self.centralWidget)
+        #layout.addWidget(self.scrollArea)
+        #self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        #self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1112, 932))
+        #self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        #Interface.setCentralWidget(self.centralWidget)
+        ##
         #initialize(self)
         self.DEBUG = True
         self.dirty = True # this flag indicates SIMULATION is REQUIRED
@@ -412,7 +422,7 @@ class Window(QtWidgets.QDialog):
         #axHist.set_xticklabels([])        
         #axHist.hist(S[-1, :N], bins=51, density=True, orientation='horizontal', rwidth=2)
         N = self.randomwalk_params['N']
-        axHist.hist(self.S[-1, :N], density=True, bins=101, orientation='horizontal', alpha=0.80, color='brown')
+        axHist.hist(self.S[-1, :N], density=True, bins=101, orientation='horizontal', alpha=0.40, color='green')
         axHist.yaxis.set_ticks_position("right")
         axHist.xaxis.set_major_formatter(FuncFormatter('{0:.1%}'.format))
         axHist.grid(True)
@@ -431,13 +441,14 @@ class Window(QtWidgets.QDialog):
         #self.slider_t1.setEnabled(True)
         t1 = self.slider_t1.value()
         t2 = self.slider_t2.value()
-        mainplot.axvline(x=t1/self.t1t2_max, color="red")
-        mainplot.axvline(x=t2/self.t1t2_max, color="blue")
+        mainplot.axvline(x=t1/self.t1t2_max, color="red", alpha=0.5, linewidth=1)
+        mainplot.axvline(x=t2/self.t1t2_max, color="blue", alpha=0.5, linewidth=1)
         ax3 = mpl.axes[1][0]
         ax3.clear()
         ax3.set_xlabel('price', fontsize=8, color='brown')
         ax3.tick_params(axis = 'both', which = 'major', labelsize = 6)
-        #ax3.yaxis.set_major_formatter(FuncFormatter('{0:.1}'.format))
+        ax3.grid(True)
+        ax3.yaxis.set_major_formatter(FuncFormatter('{0:.1%}'.format))
         MaxStep = self.S.shape[0]-1
         ax3.hist(self.S[min(t1+0, MaxStep), :], density=True, bins=101, orientation='vertical', rwidth=2, color='red', alpha=0.5)
         ax3.hist(self.S[min(t2+0, MaxStep), :], density=True, bins=101, orientation='vertical', rwidth=2, color='blue', alpha=0.5)

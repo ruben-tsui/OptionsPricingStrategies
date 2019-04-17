@@ -6,7 +6,7 @@ Created on Wed Jan 28 13:59:22 2019
 Understanding optics with Python - [Multidisciplinary & applied optics] Ammar, Ahmed_ Lakshminarayanan, Vasudevan_ Varadharajan, L. Srinivasa - CRC 2017.pdf
 """
 import os
-os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "0"
 
 '''MATPLOTLIB WIDGET'''
 # Python Qt5 bindings for GUI objects

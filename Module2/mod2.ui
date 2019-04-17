@@ -332,7 +332,7 @@ p, li { white-space: pre-wrap; }
     </font>
    </property>
    <property name="text">
-    <string>label_t1</string>
+    <string>1.0</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_t2">
@@ -350,7 +350,7 @@ p, li { white-space: pre-wrap; }
     </font>
    </property>
    <property name="text">
-    <string>label_t2</string>
+    <string>1.0</string>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
@@ -429,16 +429,6 @@ p, li { white-space: pre-wrap; }
     <item>
      <property name="text">
       <string>200000</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>500000</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>1000000</string>
      </property>
     </item>
    </widget>
