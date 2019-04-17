@@ -478,14 +478,14 @@ class Window(QtWidgets.QDialog):
         if self.radioRW.isChecked():
             K = log(K)
         N = self.randomwalk_params['N']
-        X = self.S[T, :] - K
+        X = self.S[-1, :] - K
         mean1 =  X[X > 0].sum()/N
-        X = self.S[T, :]
+        X = self.S[-1, :]
         mean1a = (np.maximum(X, K) - K).mean()   ## (a - b)+ = max(a, b) - b
         ## Compute E[(K - X_n)^+]
-        X = K - self.S[T, :]
+        X = K - self.S[-1, :]
         mean2 =  X[X > 0].sum()/N
-        X = self.S[T, :]
+        X = self.S[-1, :]
         mean2a = (np.maximum(K, X) - X).mean()
         del(X)
         table.setItem(4, 0, QTableWidgetItem(f"{mean1:.2f}"))
@@ -575,3 +575,6 @@ if __name__ == '__main__':
     window.show()
     #window.initialize()
     sys.exit(app.exec_())
+    ###
+
+    
