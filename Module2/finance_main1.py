@@ -135,7 +135,11 @@ class Window(QtWidgets.QDialog):
     def __init__(self):
         QtWidgets.QDialog.__init__(self)
         # load the .ui file created in Qt Creator directly
-        Interface = uic.loadUi('mod2.ui', self)
+        print(f"screen width = {screen_width}")
+        if screen_width >= 1920:
+            Interface = uic.loadUi('mod2.ui', self)
+        else:
+            Interface = uic.loadUi('mod2s.ui', self)
         ## try to make main window scrollable
         #self.centralWidget = QtWidgets.QWidget(Interface)
         #layout = QtWidgets.QVBoxLayout(self.centralWidget)
@@ -570,7 +574,12 @@ if __name__ == '__main__':
 
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    ### load appropriately sized UI based on screen resolution detected
+    screen = app.primaryScreen()
+    screen_width=screen.size().width()
     window = Window()
+    ###
+    #window = Window()
     #window.showGraph()
     window.show()
     #window.initialize()
