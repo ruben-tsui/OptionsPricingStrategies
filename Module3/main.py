@@ -318,5 +318,5 @@ if __name__ == '__main__':
     window.oMplCanvas_Theta_T2M.hide()
     window.reset()
     window.show()
-    #sys.exit(app.exec_())
+    sys.exit(app.exec_())
 
