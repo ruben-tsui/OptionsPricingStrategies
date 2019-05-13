@@ -185,6 +185,12 @@ class Window(QtWidgets.QDialog):
 
         mpl2 = self.oMplCanvas_Theta_T2M.canvas
         s5 = mpl2.axes[0]
+
+        if self.greek != 'Θ' or not self.check_Theta_T2M.isChecked():
+            window.oMplCanvas_Theta_T2M.hide()
+        else:
+            window.oMplCanvas_Theta_T2M.show()
+
         #S0 = 100; K = 100; r = 0.025; q = 0.005; σ = 0.2; T = 1.0
         K      = self.K
         r      = self.r
@@ -287,12 +293,12 @@ class Window(QtWidgets.QDialog):
         if self.check_Theta_T2M.isChecked() and self.greek == 'Θ':
             self.oMplCanvas_Theta_T2M.show()
             #print("Cool!")
-            S0 = 100
+            S0 = slope
             s5.set_title("Variation of Θ with time to maturity", fontsize=10, color='brown')
             s5.grid(True)
             s5.get_shared_y_axes().remove(s3)
             t = np.linspace(0, 0.99, 100) # time to maturity
-            K_vec = [90, 100, 110] 
+            K_vec = [S0-10, S0, S0+10] 
             Θ_vec = [None, None, None]
             Θ_vec[0] = bsm.theta(S0, K_vec[0], r, q, σ, T-t, category='call')
             Θ_vec[1] = bsm.theta(S0, K_vec[1], r, q, σ, T-t, category='call')
